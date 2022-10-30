@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "نتیجه پرداخت ";
+}
+
+<div class="main-content col-12 col-md-7 col-lg-5 mx-auto">
+    <div class="account-box text-center">
+        <a href="#" class="logo">
+            <img src="assets/img/logo.png" alt="">
+        </a>
+     
+        <div class="account-box-content">
+          
+            <div class="account-box-message">
+             
+                @if (ViewBag.IsSuccess == true)
+                {
+                    <div class="text-success">
+                        <h2>عملیات با موفقیت انجام شد </h2>
+                        <p>کد پیگیری:@ViewBag.code</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-danger">
+                        <h2> پرداخت با شکست مواجه شد </h2>
+                   
+                    </div>
+                }
+                <ul class="account-box-message-links">
+                    <li>
+
+                    </li>
+                    <li><a href="/UserPanel" class="btn-link-border">بازگشت به صفحه‌ای که در آن بودید</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<DgKala.Models.ViewModels.Category.ShowCategoryListItemViewModel>
+
+       @foreach (var item in Model)
+       {
+           <partial name="_BoxCategory" model="@item" />
+       }

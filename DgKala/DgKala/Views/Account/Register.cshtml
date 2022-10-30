@@ -1,0 +1,62 @@
+﻿@model DgKala.Models.ViewModels.AccountViewModel.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="wrapper default">
+    <div class="container">
+        <div class="row">
+            <div class="main-content col-12 col-md-7 col-lg-5 mx-auto">
+                <div class="account-box">
+
+                    <a href="/" class="logo">
+                        <img src="assets/img/logo.png" alt="">
+                    </a>
+
+
+                    <form asp-action="Register" method="post">
+                        <div class="form-account-title">نام کاربری</div>
+                        <div class="form-account-row">
+                            <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
+                            <input asp-for="UserName" class="input-field" type="text" placeholder="نام  را وارد کنید">
+
+                        </div>
+                        <div class="form-account-title">ایمیل</div>
+                        <div class="form-account-row">
+                            <label class="input-label"><i class="now-ui-icons users_single-02"></i></label>
+                            <input asp-for="Email" class="input-field" type="text" placeholder="آدرس ایمیل را وارد کنید">
+
+                        </div>
+                        <div class="form-account-title">کلمه عبور</div>
+                        <div class="form-account-row">
+                            <label class="input-label"><i class="now-ui-icons ui-1_lock-circle-open"></i></label>
+                            <input asp-for="Password" class="input-field" type="password" placeholder="کلمه عبور خود را وارد نمایید">
+
+                        </div>
+                        <div class="form-account-title">تکرار کلمه عبور</div>
+                        <div class="form-account-row">
+                            <label class="input-label"><i class="now-ui-icons ui-1_lock-circle-open"></i></label>
+
+                            <input asp-for="RePassword" class="input-field" type="password" placeholder="تکرار کلمه عبور  را وارد نمایید">
+
+                        </div>
+                        <div class="form-account-row form-account-submit">
+                            <div class="parent-btn">
+                                <button class="dk-btn dk-btn-info">
+                                    ثبت نام در دیجی کالا
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                    </form>
+                </div>
+                <div class="account-box-footer">
+                    <span>قبلا در دیجی کالا ثبت‌نام کرده‌اید؟</span>
+                    <a href="/Login" class="btn-link-border">وارد شوید</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

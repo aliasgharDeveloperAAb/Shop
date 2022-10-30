@@ -1,0 +1,33 @@
+﻿@model Tuple<List<DgKala.Models.Entities.Category.CategoryComment>,int>
+
+@{
+    ViewData["Title"] = "کامنت ";
+    Layout = null;
+}
+@foreach (var item in Model.Item1)
+{
+
+        <ol class="comment-list">
+            <!-- #comment-## -->
+            <li>
+                <div class="comment-body">
+                    <div class="comment-author">
+                        <img alt="" src="/UserAvatar/@item.User.UserAvatar" class="avatar"><cite class="fn">@item.User.UserName</cite>
+                        <span class="says">گفت:</span>
+                    </div>
+
+                    <div class="commentmetadata">
+                        <a href="#">
+                            @item.CreateDate
+                        </a>
+                    </div>
+
+                    <p>@item.Comment</p>
+
+                    <div class="reply"><a class="comment-reply-link" href="#">پاسخ</a></div>
+                </div>
+            </li>
+
+        </ol>
+  
+}

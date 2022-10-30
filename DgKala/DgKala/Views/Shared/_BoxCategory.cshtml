@@ -1,0 +1,18 @@
+﻿@model DgKala.Models.ViewModels.Category.ShowCategoryListItemViewModel
+
+<div class="item">
+    <a href="/ShowCategory/@Model.CategoryId">
+        <img src="/Category/thumb/@Model.ImageName" 
+             alt="">
+    </a>
+    <h2 class="post-title" >
+        <a href="/ShowCategory/@Model.CategoryId">@Model.Title </a>
+    </h2>
+    <div class="price">
+     @*   <del><span>4,299,000<span>تومان</span></span></del>*@
+        <ins><span>@Model.Price.ToString("#,0")<span>تومان</span></span></ins>
+    </div>
+</div>
+
+
+

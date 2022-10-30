@@ -1,0 +1,28 @@
+﻿@model DgKala.Models.Entities.User.User
+@{
+    ViewData["Title"] = "پایان ثبت نام";
+}
+
+<div class="main-content col-12 col-md-7 col-lg-5 mx-auto">
+    <div class="account-box text-center">
+        <p></p>
+        <a href="/" class="logo">
+            <p></p>
+            <img src="assets/img/logo.png" alt="">
+        </a>
+        <div class="account-box-title text-center">به دیجی کالا خوش آمدید</div>
+        <div class="account-box-content">
+            <div class="account-box-message">
+                <i class="account-box-message-icon now-ui-icons users_single-02"></i>
+                <h3>@Model.UserName گرامی!</h3>
+                <h3>حساب کاربری شما در دیجی کالا ساخته شد</h3>
+                <p>
+                    ایمیلی حاوی لینک فعالسازی به ایمیل"@Model.Email"ارسال شد
+                </p>
+                <p>جهت ادامه ثبت نام وارد ایمیل خود شوید و روی لینک کلیک کنید </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+

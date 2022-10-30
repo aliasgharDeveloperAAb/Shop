@@ -1,0 +1,43 @@
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+
+@{
+    ViewData["Title"] = "فعالسازی ";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="main-content col-12 col-md-7 col-lg-5 mx-auto">
+            <div class="account-box text-center">
+                <a href="#" class="logo">
+                    <img src="assets/img/logo.png" alt="">
+                </a>
+                <div class="account-box-title text-center">به دیجی کالا خوش آمدید</div>
+                <div class="account-box-content">
+                    <div class="account-box-message">
+                        <i class="account-box-message-icon now-ui-icons users_single-02"></i>
+                      @if (ViewBag.IsActive)
+                      {
+                          <div class="alert alert-success">
+                              <p>حساب کاربری شما با موفقیت فعال شد </p>
+                          
+                          </div>
+                        <a href="/Login"class="btn btn-outline-primary">ورود به سایت</a>
+                         
+                      }
+                      else
+                      {
+                          <div class="alert alert-danger">
+                              <p>حساب کاربری  بامشخصات ارسال شده یافت نشد  </p>
+                             
+                          </div>
+                      }
+                      
+                 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       
+

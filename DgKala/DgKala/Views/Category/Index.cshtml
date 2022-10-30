@@ -1,0 +1,148 @@
+﻿@using DgKala.Models.Entities.Category
+@model Tuple<List<DgKala.Models.ViewModels.Category.ShowCategoryListItemViewModel>,int>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <form id="formFilter" action="/Category" method="get">
+        <input type="hidden" name="pageId" value="@ViewBag.pageId.ToString()" />
+
+        <div class="row">
+            <aside class="sidebar-page col-12 col-sm-12 col-md-4 col-lg-3 order-1">
+                <div class="box">
+                    <div class="box-header">جستجو در نتایج:</div>
+                    <div class="box-content">
+
+                        <div class="ui-input ui-input--quick-search">
+                            <input type="text" name="filter" class="ui-input-field ui-input-field--cleanable" placeholder="نام محصول یا برند مورد نظر را بنویسید…">
+                            <button type="submit" class="btn btn-primary">جست وجو </button>
+                            <span class="ui-input-cleaner"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-toggle" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true" aria-controls="collapseExample1">
+                            دسته بندی نتایج
+                            <i class="now-ui-icons arrows-1_minimal-down"></i>
+                            <p></p>
+                            <a href="/Category" class="btn btn-danger">پاک کردن </a>
+
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        @{
+                            List<CategoryGroups> groups = ViewBag.Groups as List<CategoryGroups>;
+                            List<int> selected = ViewBag.selectedGroups as List<int>;
+                        }
+                        <div class="collapse show" id="collapseExample1">
+                            <div class="ui-input ui-input--quick-search">
+                                <input type="text" class="ui-input-field ui-input-field--cleanable" placeholder="نام دسته بندی مورد نظر را بنویسید…">
+                                <span class="ui-input-cleaner"></span>
+                            </div>
+
+                            <div class="filter-option">
+                                <ul>
+                                    @foreach (var group in groups.Where(g => g.ParentID == null))
+                                    {
+                                        <li>
+                                            <input onchange="changeGroup()" type="checkbox" @((selected.Any(s=>s==group.GroupId)?"checked":"")) name="selectedGroups" value="@group.GroupId" id="cat-1">
+                                            <label for="cat-1"> @group.GroupTitle </label>
+                                            @if (groups.Any(g => g.ParentID == group.GroupId))
+                                            {
+                                                <ul>
+                                                    @foreach (var sub in groups.Where(g => g.ParentID == group.GroupId))
+                                                    {
+                                                        <li>
+                                                            <input onchange="changeGroup()" @((selected.Any(s=>s==sub.GroupId)?"checked":"")) type="checkbox" name="selectedGroups" value="@sub.GroupId" id="cat-1">
+                                                            <label for="cat-1"> @sub.GroupTitle </label>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+
+                                        </li>
+                                    }
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+            <div class="col-12 col-sm-12 col-md-8 col-lg-9 order-2">
+                <div class="breadcrumb-section default">
+                    <ul class="breadcrumb-list">
+                        <li>
+                            <a href="#">
+                                <span>فروشگاه اینترنتی دیجی کالا</span>
+                            </a>
+                        </li>
+                        <li><span>جستجوی موبایل</span></li>
+                    </ul>
+                </div>
+
+                <div class="listing-header default">
+                    <ul class="listing-sort nav nav-tabs justify-content-center" role="tablist" data-label="مرتب‌سازی بر اساس :">
+                        <li value="all">
+
+                            <a class="active" data-toggle="tab" href="#related" role="tab" aria-expanded="false">همه</a>
+                        </li>
+                        <li value="maxPrice">
+                            <a data-toggle="tab" href="#most-view" role="tab" aria-expanded="false">بیشترین قیمت </a>
+                        </li>
+                        <li value="low price">
+                            <a data-toggle="tab" href="#new" role="tab" aria-expanded="true">کمترین قیمت </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="tab-content default text-center">
+
+                    <div class="tab-pane active" id="related" role="tabpanel" aria-expanded="true">
+
+                        <div class="container no-padding-right" style="margin: 10px 0">
+
+                            @foreach (var item in Model.Item1)
+                            {
+                               <partial name="_BoxCategory"model="@item"/>
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+             @if (Model.Item2 > 1)
+             {
+                 <div class="pager default text-center">
+                     <ul class="pager-items">
+                       @for (int i = 1; i <= Model.Item2; i++)
+                       {
+                           <li>
+                               <a class="pager-item is-active" href="/Category?pageId=@i">@i</a>
+                           </li>
+                       }
+                      
+                     </ul>
+                 </div>
+             }
+            </div>
+        </div>
+    </form>
+</div>
+@section Search
+    {
+    <script>
+        function changeGroup() {
+            $("#formFilter").submit();
+        }
+    </script>
+}
+

@@ -1,0 +1,82 @@
+﻿@model DgKala.Models.ViewModels.InformationViewModel.EditProfileViewModel
+@{
+    ViewData["Title"] = "EditProfile";
+}
+
+
+<div class="container">
+    <main class="profile-user-page default">
+        <p></p>
+        <div class="container">
+            <div class="row">
+
+                <div class="profile-page col-xl-9 col-lg-8 col-md-12 order-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-12">
+                                <h1 class="title-tab-content">ویرایش اطلاعات شخصی</h1>
+                            </div>
+                            <div class="content-section default">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h1 class="title-tab-content">حساب شخصی</h1>
+                                    </div>
+                                </div>
+                                <form asp-action="EditProfile" method="post" enctype="multipart/form/date">
+                                    @if (ViewBag.IsSuccess != null)
+                                    {
+                                        <div class="alert alert-success">
+                                            اظلاعات کاربری شما با موفقیت ویرایش شد
+                                        </div>
+                                    }
+                                    <input type="hidden" asp-for="AvatarName" />
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-account-title">نام کاربری </div>
+                                            <div class="form-account-row">
+                                                <input asp-for="UserName" class="input-field text-right " type="text" placeholder="نام کاربری  خود را وارد نمایید">
+                                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-account-title">آدرس ایمیل</div>
+                                            <div class="form-account-row">
+                                                <input asp-for="Email" class="input-field" type="email" placeholder=" آدرس ایمیل خود را وارد نمایید">
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-12 col-md-6">
+                                            <label class="help-block">
+                                                آواتار
+                                            </label>
+                                            <div class="form-account-row">
+                                                <input type="file" asp-for="UserAvatar" />
+                                                <p>لطفا تصویر مورد نظر را انتخاب کنید </p>
+                                                <img  src="/UserAvatar/@Model.AvatarName" class="thumbnail" style="max-width: 150px" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 no-padding">
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <input type="submit" class="btn btn-default btn-lg" value="ذخیره" />
+                                        <input type="submit" class="btn btn-default btn-lg" value="انصراف" />
+
+
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <partial name="_SiteBar" />
+            </div>
+        </div>
+    </main>
+</div>
+

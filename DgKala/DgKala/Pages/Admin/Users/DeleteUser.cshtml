@@ -1,0 +1,29 @@
+﻿@page "{id}"
+@using DgKala.Convertors
+@model DgKala.Pages.Admin.Users.DeleteUserModel
+@{
+    ViewData["Title"] = "حذف کاربر ";
+}
+<div class="panel panel-danger">
+    <div class="panel-heading">
+       حذف کاربر 
+    </div>
+    <form method="post">
+        <input type="hidden"name="UserId"value="@ViewData["UserId"].ToString()"/>
+        <div class="panel-body">
+            <dl>نام کاربری:</dl>
+            <dd>@Model.InformationViewModel.UserName</dd>
+            <dl>ایمیل:</dl>
+            <dd>@Model.InformationViewModel.Email</dd>
+            <dl>موجودی کیف پول :</dl>
+            <dd>@Model.InformationViewModel.Wallet</dd>
+            <dl>تاریخ ثبت نام :</dl>
+            <dd>@Model.InformationViewModel.RegisterDate.ToShamsi()</dd>
+            <dt></dt>
+            <dd>
+                <input type="submit"value="حذف" class="btn btn-danger"/>
+            </dd>
+
+        </div>
+    </form>
+</div>

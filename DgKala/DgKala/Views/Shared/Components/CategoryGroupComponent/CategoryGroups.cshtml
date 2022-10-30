@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DgKala.Models.Entities.Category.CategoryGroups>
+
+
+<nav class="main-menu">
+    <div class="container">
+        <ul class="list float-right">
+            @foreach (var group in Model.Where(p => p.ParentID == null))
+            {
+                <li class="list-item list-item-has-children mega-menu mega-menu-col-5">
+                    <a class="nav-link" href="/Category?selectedGroups=@group.GroupId">@group.GroupTitle</a>
+                    <ul class="sub-menu nav">
+
+
+                        <li class="list-item list-item-has-children">
+                            <i class="now-ui-icons arrows-1_minimal-left"></i>
+                          @*  <a class="main-list-item nav-link"
+                           href="#">
+                              
+                            </a>*@
+                            <ul class="sub-menu nav">
+                                <ul>
+                                    @if (Model.Any(p => p.ParentID == group.GroupId))
+                                    {
+
+                                        @foreach (var group2 in Model.Where(p => p.ParentID == group.GroupId))
+                                        {
+                                            <li class="list-item">
+                                                <a class="nav-link" href="/Category?selectedGroups=@group2.GroupId">@group2.GroupTitle</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+
+            }
+        </ul>
+
+
+
+    </div>
+</nav>

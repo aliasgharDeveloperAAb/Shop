@@ -1,0 +1,47 @@
+﻿@using DgKala.Convertors
+@model IEnumerable<DgKala.Models.Entities.Quesion.Question>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="inner"style="padding: 8px">
+                <div class="panel">
+                    <a asp-controller="Forum"asp-action="CreateQuestion"class="btn btn btn-success">
+                       پرسیدن سوال 
+                    </a>
+                    <form class="form-inline">
+                        <input type="text"class="form-control"name="filter" placeholder="عبارت مورد نظر را وارد کنید "/>
+                        <input type="submit"class="btn btn btn-success"value="پیدا کن "/>
+
+                        <input type="hidden" name="categoryId" value="ViewBag.categoryId"/>
+                    </form>
+                </div>
+                    @foreach (var item in Model)
+                    {
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h2>
+                                    <a href="/Forum/ShowQuestion/@item.QuestionId">@item.Title</a>
+                                </h2>
+                                <p class="text-muted" style="margin: 10px">
+                                    <a>@item.Category.CategoryTitle</a>
+                                    <a>@item.User.UserName</a>
+                                    <span class="text-muted badge">@item.CreateDate.ToShamsi()</span>
+
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+

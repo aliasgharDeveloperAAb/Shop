@@ -1,0 +1,106 @@
+﻿@page
+@model DgKala.Pages.Admin.Categorys.CreateCategoryModel
+@{
+    ViewData["Title"] = "افزودن محصول جدید";
+}
+<div class="row">
+    <form method="post" enctype="multipart/form-data">
+        <div class="col-md-8">
+            <div class="form-group">
+                <h2>اطلاعات محصول</h2>
+                <label>نام محصول </label>
+                <input type="text" asp-for="Category.CategoryTitle" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>گروه اصلی </label>
+                <select class="form-control" asp-for="Category.GroupId" asp-items="@(ViewData["Groups"]as SelectList)"></select>
+            </div>
+            <div class="form-group">
+                <label>زیر گروه  </label>
+                <select class="form-control" asp-for="Category.SubGroup" asp-items="@(ViewData["SubGroups"]as SelectList)"></select>
+            </div>
+            <div class="form-group">
+                <label>فروشنده محصول  </label>
+                <select class="form-control" asp-for="Category.TeacherId" asp-items="@(ViewData["Teachers"]as SelectList)"></select>
+            </div>
+            <div class="form-group">
+                <label>شرح محصول  </label>
+                <textarea class="form-control" asp-for="Category.Description" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>قیمت  محصول  </label>
+                <input type="number" class="form-control" asp-for="Category.CategoryPrice" />
+            </div>
+            <div class="form-group">
+                <label>کلمات کلیدی  محصول  </label>
+                <input type="text" class="form-control" asp-for="Category.Tags" />
+                <p class="help-block">لطفا کلمات را با - جدا کنید </p>
+            </div>
+            <input type="submit" class="btn btn-success" value="ذخیره اطلاعات " />
+        </div>
+        <div class="col-md-4">
+            <br />
+
+            <img id="imgCategory" class="thumbnail" src="/UserAvatar/1.jpg" />
+            <div class="form-group">
+                <label>تصویر مورد نظر را انتخاب کنید </label>
+                <input type="file" name="imgCategoryUp" id="imgCategoryUp">
+            </div>
+            <div class="form-group">
+                <label>ویژگی محصول  </label>
+                <textarea class="form-control" asp-for="Category.Attributes" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label>وضعیت محصول  </label>
+                <select class="form-control" asp-for="Category.StatuesId" asp-items="@(ViewData["Statues"]as SelectList)"></select>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+    {
+    <script>
+        $("#Category_GroupId").change(function () {
+            $("#Category_SubGroup").empty();
+            $.getJSON("/home/GetSubGroups/" + $("#Category_GroupId :selected").val(),
+                function (data) {
+
+                    $.each(data,
+                        function () {
+                            $("#Category_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
+
+                        });
+
+                });
+
+
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgCategory').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgCategoryUp").change(function () {
+            readURL(this);
+        });
+    </script>
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('Category_Description', {
+            customConfig: '/js/Config.js'
+        });
+   
+    </script>
+}
+
